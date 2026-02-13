@@ -1,0 +1,46 @@
+:root {
+    /* Ultra-Premium Travel Palette */
+    --primary: #0F172A;
+    /* Deep Navy */
+    --primary-light: #1E293B;
+    --accent: #FF7E5F;
+    /* Warm Sunset Coral */
+    --accent-secondary: #FEB47B;
+    /* Peach */
+    --accent-gradient: linear-gradient(135deg, #FF7E5F 0%, #FEB47B 100%);
+
+    /* Natural UI Colors */
+    --bg-main: #F8FAFC;
+    --bg-card: #FFFFFF;
+    --bg-glass: rgba(255, 255, 255, 0.8);
+
+    /* Text */
+    --text-main: #1E293B;
+    --text-muted: #64748B;
+    --text-on-accent: #FFFFFF;
+
+    /* Status */
+    --success: #10B981;
+    --error: #EF4444;
+    --warning: #F59E0B;
+
+    /* Borders & Shadows */
+    --border: #E2E8F0;
+    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+    --shadow-premium: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+
+    /* Border Radius */
+    --radius-sm: 6px;
+    --radius-md: 12px;
+    --radius-lg: 20px;
+    --radius-full: 9999px;
+
+    /* Fonts */
+    --font-heading: 'Outfit', sans-serif;
+    --font-body: 'Inter', sans-serif;
+
+    /* Transitions */
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}

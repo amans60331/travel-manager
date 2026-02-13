@@ -1,0 +1,40 @@
+.typing-indicator {
+    display: flex;
+    gap: 6px;
+    padding: 12px 20px;
+    background: var(--bg-main);
+    border-radius: var(--radius-lg);
+    width: fit-content;
+    align-self: flex-start;
+    margin-left: 56px;
+}
+
+.typing-dot {
+    width: 8px;
+    height: 8px;
+    background: var(--accent);
+    border-radius: 50%;
+    animation: typing-bounce 1.4s infinite ease-in-out;
+}
+
+.typing-dot:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.typing-dot:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+@keyframes typing-bounce {
+
+    0%,
+    80%,
+    100% {
+        transform: translateY(0);
+    }
+
+    40% {
+        transform: translateY(-8px);
+        opacity: 0.5;
+    }
+}

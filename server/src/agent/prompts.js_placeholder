@@ -1,0 +1,5 @@
+const { SYSTEM_PROMPT, TOOL_DEFINITIONS } = require('./prompts');
+
+// This file is just a placeholder if we want to split logic later.
+// Currently prompts are handled in prompts.js
+module.exports = { SYSTEM_PROMPT, TOOL_DEFINITIONS };

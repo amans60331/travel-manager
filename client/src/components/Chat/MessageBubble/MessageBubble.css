@@ -1,0 +1,136 @@
+.message {
+    display: flex;
+    gap: 12px;
+    max-width: 85%;
+    margin-bottom: 8px;
+    animation: slide-up 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.message--user {
+    align-self: flex-end;
+    flex-direction: row-reverse;
+}
+
+.message--assistant {
+    align-self: flex-start;
+}
+
+.message__avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+    box-shadow: var(--shadow-sm);
+    background: var(--primary);
+}
+
+.message--user .message__avatar {
+    background: var(--accent-gradient);
+}
+
+.message__content {
+    padding: 14px 18px;
+    border-radius: 18px;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    position: relative;
+    box-shadow: var(--shadow-sm);
+}
+
+.message--user .message__content {
+    background: var(--accent-gradient);
+    color: white;
+    border-bottom-right-radius: 4px;
+    font-weight: 500;
+}
+
+.message--assistant .message__content {
+    background: white;
+    color: var(--text-main);
+    border: 1px solid var(--border);
+    border-bottom-left-radius: 4px;
+}
+
+.message__time {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    margin-top: 4px;
+    opacity: 0.7;
+    display: block;
+}
+
+.message--user .message__time {
+    text-align: right;
+}
+
+/* Enhanced Markdown/Text styling */
+.message__content p {
+    margin-bottom: 8px;
+}
+
+.message__content p:last-child {
+    margin-bottom: 0;
+}
+
+.message__content strong {
+    font-weight: 700;
+}
+
+.message--user strong {
+    color: white;
+    text-decoration: underline rgba(255, 255, 255, 0.4);
+}
+
+.message__content h3 {
+    margin: 12px 0 8px;
+    font-size: 1.1rem;
+    color: var(--primary);
+}
+
+.message--user h3 {
+    color: white;
+}
+
+.message__content table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 12px 0;
+    background: rgba(0, 0, 0, 0.02);
+    border-radius: 12px;
+    overflow: hidden;
+    font-size: 0.9rem;
+}
+
+.message__content td,
+.message__content th {
+    padding: 10px 14px;
+    border: 1px solid var(--border);
+}
+
+.message__content th {
+    background: var(--bg-main);
+    color: var(--primary);
+    text-align: left;
+    font-weight: 700;
+}
+
+.message--user table {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.message--user td,
+.message--user th {
+    border-color: rgba(255, 255, 255, 0.2);
+    color: white;
+}
+
+@media (max-width: 768px) {
+    .message {
+        max-width: 92%;
+    }
+}

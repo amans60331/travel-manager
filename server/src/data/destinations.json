@@ -1,0 +1,809 @@
+[
+    {
+        "name": "Manali",
+        "type": "mountains",
+        "state": "Himachal Pradesh",
+        "avgDailyCost": 2000,
+        "bestSeasons": [
+            "Oct",
+            "Nov",
+            "Dec",
+            "Jan",
+            "Feb",
+            "Mar"
+        ],
+        "reachableFrom": [
+            {
+                "city": "Delhi",
+                "busAvg": 1800,
+                "trainAvg": 1200,
+                "flightAvg": 5500,
+                "busDuration": "12-14 hrs",
+                "trainDuration": "14 hrs (to Chandigarh) + 6 hrs bus"
+            },
+            {
+                "city": "Chandigarh",
+                "busAvg": 800,
+                "trainAvg": 600,
+                "flightAvg": null,
+                "busDuration": "6-8 hrs",
+                "trainDuration": "N/A"
+            },
+            {
+                "city": "Mumbai",
+                "busAvg": null,
+                "trainAvg": 2000,
+                "flightAvg": 6000,
+                "busDuration": "N/A",
+                "trainDuration": "24 hrs (to Delhi) + 12 hrs bus"
+            },
+            {
+                "city": "Bangalore",
+                "busAvg": null,
+                "trainAvg": 2500,
+                "flightAvg": 7000,
+                "busDuration": "N/A",
+                "trainDuration": "30 hrs (to Delhi) + 12 hrs bus"
+            },
+            {
+                "city": "Kolkata",
+                "busAvg": null,
+                "trainAvg": 2200,
+                "flightAvg": 7500,
+                "busDuration": "N/A",
+                "trainDuration": "24 hrs (to Delhi) + 12 hrs bus"
+            }
+        ],
+        "highlights": [
+            "Snow in Feb",
+            "Solang Valley",
+            "Old Manali cafes",
+            "Hadimba Temple",
+            "River rafting"
+        ],
+        "description": "A stunning hill station in Himachal Pradesh, known for snow-capped peaks, adventure sports, and vibrant cafes.",
+        "localData": {
+            "scootyCostPerDay": 700,
+            "taxiCostPerDay": 2000,
+            "avgMealCost": 200,
+            "topRestaurants": [
+                {
+                    "name": "Cafe 1947",
+                    "cuisine": "Multi-cuisine",
+                    "avgCost": 300,
+                    "rating": 4.5
+                },
+                {
+                    "name": "Johnson's Cafe",
+                    "cuisine": "Continental",
+                    "avgCost": 400,
+                    "rating": 4.3
+                },
+                {
+                    "name": "Drifters Cafe",
+                    "cuisine": "Italian/Indian",
+                    "avgCost": 250,
+                    "rating": 4.4
+                },
+                {
+                    "name": "Lazy Dog Lounge",
+                    "cuisine": "Cafe",
+                    "avgCost": 300,
+                    "rating": 4.2
+                }
+            ],
+            "sightseeing": [
+                {
+                    "name": "Solang Valley",
+                    "entryCost": 0,
+                    "timeNeeded": "4-5 hrs",
+                    "description": "Snow activities and paragliding"
+                },
+                {
+                    "name": "Hadimba Temple",
+                    "entryCost": 0,
+                    "timeNeeded": "1 hr",
+                    "description": "Ancient cave temple"
+                },
+                {
+                    "name": "Jogini Waterfall",
+                    "entryCost": 0,
+                    "timeNeeded": "3 hrs",
+                    "description": "Beautiful trek to a waterfall"
+                },
+                {
+                    "name": "Old Manali",
+                    "entryCost": 0,
+                    "timeNeeded": "3-4 hrs",
+                    "description": "Charming village with cafes"
+                }
+            ]
+        }
+    },
+    {
+        "name": "Kasol",
+        "type": "mountains",
+        "state": "Himachal Pradesh",
+        "avgDailyCost": 1500,
+        "bestSeasons": [
+            "Oct",
+            "Nov",
+            "Dec",
+            "Jan",
+            "Feb",
+            "Mar",
+            "Apr",
+            "May"
+        ],
+        "reachableFrom": [
+            {
+                "city": "Delhi",
+                "busAvg": 1500,
+                "trainAvg": 1000,
+                "flightAvg": 5500,
+                "busDuration": "12-13 hrs",
+                "trainDuration": "12 hrs (to Bhuntar) + 1.5 hrs bus"
+            },
+            {
+                "city": "Chandigarh",
+                "busAvg": 700,
+                "trainAvg": 500,
+                "flightAvg": null,
+                "busDuration": "7-8 hrs",
+                "trainDuration": "N/A"
+            }
+        ],
+        "highlights": [
+            "Israel of India",
+            "Parvati Valley",
+            "Tosh village",
+            "Budget-friendly"
+        ],
+        "description": "A tiny hamlet in Parvati Valley, famous for its Israeli influence and stunning treks.",
+        "localData": {
+            "scootyCostPerDay": 600,
+            "taxiCostPerDay": 1500,
+            "avgMealCost": 150,
+            "topRestaurants": [
+                {
+                    "name": "Evergreen Cafe",
+                    "cuisine": "Israeli/Indian",
+                    "avgCost": 200,
+                    "rating": 4.3
+                },
+                {
+                    "name": "Jim Morrison Cafe",
+                    "cuisine": "Multi-cuisine",
+                    "avgCost": 250,
+                    "rating": 4.1
+                },
+                {
+                    "name": "Moon Dance Cafe",
+                    "cuisine": "Cafe",
+                    "avgCost": 200,
+                    "rating": 4.2
+                }
+            ],
+            "sightseeing": [
+                {
+                    "name": "Kheerganga Trek",
+                    "entryCost": 0,
+                    "timeNeeded": "2 days",
+                    "description": "Trek to natural hot springs"
+                },
+                {
+                    "name": "Tosh Village",
+                    "entryCost": 0,
+                    "timeNeeded": "Half day",
+                    "description": "Scenic village with views"
+                },
+                {
+                    "name": "Chalal Trek",
+                    "entryCost": 0,
+                    "timeNeeded": "2-3 hrs",
+                    "description": "Easy riverside trek"
+                }
+            ]
+        }
+    },
+    {
+        "name": "Rishikesh",
+        "type": "adventure",
+        "state": "Uttarakhand",
+        "avgDailyCost": 1800,
+        "bestSeasons": [
+            "Sep",
+            "Oct",
+            "Nov",
+            "Dec",
+            "Jan",
+            "Feb",
+            "Mar",
+            "Apr"
+        ],
+        "reachableFrom": [
+            {
+                "city": "Delhi",
+                "busAvg": 600,
+                "trainAvg": 400,
+                "flightAvg": 4000,
+                "busDuration": "6-7 hrs",
+                "trainDuration": "5-6 hrs"
+            },
+            {
+                "city": "Mumbai",
+                "busAvg": null,
+                "trainAvg": 1500,
+                "flightAvg": 5500,
+                "busDuration": "N/A",
+                "trainDuration": "22 hrs"
+            }
+        ],
+        "highlights": [
+            "Yoga capital",
+            "River rafting",
+            "Laxman Jhula",
+            "Beatles Ashram"
+        ],
+        "description": "The adventure and yoga capital of India, sitting on the banks of the Ganges.",
+        "localData": {
+            "scootyCostPerDay": 500,
+            "taxiCostPerDay": 1200,
+            "avgMealCost": 150,
+            "topRestaurants": [
+                {
+                    "name": "Little Buddha Cafe",
+                    "cuisine": "Multi-cuisine",
+                    "avgCost": 250,
+                    "rating": 4.4
+                },
+                {
+                    "name": "Beatles Cafe",
+                    "cuisine": "Continental",
+                    "avgCost": 300,
+                    "rating": 4.2
+                }
+            ],
+            "sightseeing": [
+                {
+                    "name": "River Rafting",
+                    "entryCost": 800,
+                    "timeNeeded": "3-4 hrs",
+                    "description": "White water rafting on the Ganges"
+                },
+                {
+                    "name": "Laxman Jhula",
+                    "entryCost": 0,
+                    "timeNeeded": "2 hrs",
+                    "description": "Iconic suspension bridge"
+                },
+                {
+                    "name": "Beatles Ashram",
+                    "entryCost": 150,
+                    "timeNeeded": "2 hrs",
+                    "description": "Abandoned ashram with graffiti"
+                }
+            ]
+        }
+    },
+    {
+        "name": "Jaipur",
+        "type": "culture",
+        "state": "Rajasthan",
+        "avgDailyCost": 2000,
+        "bestSeasons": [
+            "Oct",
+            "Nov",
+            "Dec",
+            "Jan",
+            "Feb",
+            "Mar"
+        ],
+        "reachableFrom": [
+            {
+                "city": "Delhi",
+                "busAvg": 700,
+                "trainAvg": 450,
+                "flightAvg": 3500,
+                "busDuration": "5-6 hrs",
+                "trainDuration": "4.5-5.5 hrs"
+            },
+            {
+                "city": "Mumbai",
+                "busAvg": 1500,
+                "trainAvg": 1000,
+                "flightAvg": 4000,
+                "busDuration": "18 hrs",
+                "trainDuration": "12 hrs"
+            }
+        ],
+        "highlights": [
+            "Pink City",
+            "Amber Fort",
+            "Hawa Mahal",
+            "Street food paradise"
+        ],
+        "description": "The Pink City of India, bursting with royal palaces and vibrant bazaars.",
+        "localData": {
+            "scootyCostPerDay": 400,
+            "taxiCostPerDay": 1500,
+            "avgMealCost": 180,
+            "topRestaurants": [
+                {
+                    "name": "Rawat Mishthan Bhandar",
+                    "cuisine": "Sweets/Snacks",
+                    "avgCost": 150,
+                    "rating": 4.4
+                },
+                {
+                    "name": "Tapri Central",
+                    "cuisine": "Cafe",
+                    "avgCost": 200,
+                    "rating": 4.6
+                }
+            ],
+            "sightseeing": [
+                {
+                    "name": "Amber Fort",
+                    "entryCost": 200,
+                    "timeNeeded": "3 hrs",
+                    "description": "Majestic hillside fort"
+                },
+                {
+                    "name": "Hawa Mahal",
+                    "entryCost": 50,
+                    "timeNeeded": "1 hr",
+                    "description": "Iconic Palace of Winds"
+                },
+                {
+                    "name": "City Palace",
+                    "entryCost": 300,
+                    "timeNeeded": "2 hrs",
+                    "description": "Royal residence"
+                }
+            ]
+        }
+    },
+    {
+        "name": "Goa",
+        "type": "beach",
+        "state": "Goa",
+        "avgDailyCost": 2500,
+        "bestSeasons": [
+            "Nov",
+            "Dec",
+            "Jan",
+            "Feb",
+            "Mar"
+        ],
+        "reachableFrom": [
+            {
+                "city": "Mumbai",
+                "busAvg": 1000,
+                "trainAvg": 600,
+                "flightAvg": 3000,
+                "busDuration": "10-12 hrs",
+                "trainDuration": "8-10 hrs"
+            },
+            {
+                "city": "Bangalore",
+                "busAvg": 1200,
+                "trainAvg": 800,
+                "flightAvg": 3500,
+                "busDuration": "10-12 hrs",
+                "trainDuration": "12 hrs"
+            }
+        ],
+        "highlights": [
+            "Beaches",
+            "Nightlife",
+            "Portuguese architecture",
+            "Seafood"
+        ],
+        "description": "India's beach paradise with stunning coastline and vibrant nightlife.",
+        "localData": {
+            "scootyCostPerDay": 350,
+            "taxiCostPerDay": 1200,
+            "avgMealCost": 250,
+            "topRestaurants": [
+                {
+                    "name": "Vinayak Family Restaurant",
+                    "cuisine": "Goan",
+                    "avgCost": 200,
+                    "rating": 4.3
+                },
+                {
+                    "name": "Artjuna Cafe",
+                    "cuisine": "Cafe",
+                    "avgCost": 250,
+                    "rating": 4.4
+                }
+            ],
+            "sightseeing": [
+                {
+                    "name": "Baga Beach",
+                    "entryCost": 0,
+                    "timeNeeded": "3-4 hrs",
+                    "description": "Popular beach with shacks"
+                },
+                {
+                    "name": "Basilica of Bom Jesus",
+                    "entryCost": 0,
+                    "timeNeeded": "1 hr",
+                    "description": "Old Portuguese church"
+                },
+                {
+                    "name": "Fort Aguada",
+                    "entryCost": 0,
+                    "timeNeeded": "1.5 hrs",
+                    "description": "17th century fort"
+                }
+            ]
+        }
+    },
+    {
+        "name": "Udaipur",
+        "type": "culture",
+        "state": "Rajasthan",
+        "avgDailyCost": 2200,
+        "bestSeasons": [
+            "Oct",
+            "Nov",
+            "Dec",
+            "Jan",
+            "Feb",
+            "Mar"
+        ],
+        "reachableFrom": [
+            {
+                "city": "Delhi",
+                "busAvg": 1200,
+                "trainAvg": 800,
+                "flightAvg": 4500,
+                "busDuration": "10-12 hrs",
+                "trainDuration": "12 hrs"
+            },
+            {
+                "city": "Mumbai",
+                "busAvg": 1300,
+                "trainAvg": 900,
+                "flightAvg": 4000,
+                "busDuration": "12-14 hrs",
+                "trainDuration": "14 hrs"
+            }
+        ],
+        "highlights": [
+            "City of Lakes",
+            "Lake Pichola",
+            "City Palace",
+            "Romantic getaway"
+        ],
+        "description": "The Venice of the East — Udaipur is a dreamy city with grand palaces.",
+        "localData": {
+            "scootyCostPerDay": 400,
+            "taxiCostPerDay": 1500,
+            "avgMealCost": 200,
+            "topRestaurants": [
+                {
+                    "name": "Ambrai",
+                    "cuisine": "Indian",
+                    "avgCost": 500,
+                    "rating": 4.6
+                },
+                {
+                    "name": "Millets of Mewar",
+                    "cuisine": "Healthy",
+                    "avgCost": 250,
+                    "rating": 4.5
+                }
+            ],
+            "sightseeing": [
+                {
+                    "name": "City Palace",
+                    "entryCost": 300,
+                    "timeNeeded": "3 hrs",
+                    "description": "Grand palace complex"
+                },
+                {
+                    "name": "Lake Pichola",
+                    "entryCost": 400,
+                    "timeNeeded": "1 hr",
+                    "description": "Scenic boat ride"
+                }
+            ]
+        }
+    },
+    {
+        "name": "Varanasi",
+        "type": "culture",
+        "state": "Uttar Pradesh",
+        "avgDailyCost": 1500,
+        "bestSeasons": [
+            "Oct",
+            "Nov",
+            "Dec",
+            "Jan",
+            "Feb",
+            "Mar"
+        ],
+        "reachableFrom": [
+            {
+                "city": "Delhi",
+                "busAvg": 1000,
+                "trainAvg": 600,
+                "flightAvg": 4000,
+                "busDuration": "12-14 hrs",
+                "trainDuration": "8-12 hrs"
+            },
+            {
+                "city": "Kolkata",
+                "busAvg": null,
+                "trainAvg": 800,
+                "flightAvg": 4000,
+                "busDuration": "N/A",
+                "trainDuration": "12-14 hrs"
+            }
+        ],
+        "highlights": [
+            "Oldest city",
+            "Ganga Aarti",
+            "Ghats",
+            "Spiritual"
+        ],
+        "description": "One of the oldest continuously inhabited cities in the world.",
+        "localData": {
+            "scootyCostPerDay": 350,
+            "taxiCostPerDay": 1000,
+            "avgMealCost": 120,
+            "topRestaurants": [
+                {
+                    "name": "Blue Lassi",
+                    "cuisine": "Lassi",
+                    "avgCost": 80,
+                    "rating": 4.7
+                },
+                {
+                    "name": "Kashi Chat Bhandar",
+                    "cuisine": "Street Food",
+                    "avgCost": 100,
+                    "rating": 4.5
+                }
+            ],
+            "sightseeing": [
+                {
+                    "name": "Ganga Aarti",
+                    "entryCost": 0,
+                    "timeNeeded": "1.5 hrs",
+                    "description": "Evening ceremony at Dashashwamedh Ghat"
+                },
+                {
+                    "name": "Morning Boat Ride",
+                    "entryCost": 200,
+                    "timeNeeded": "1.5 hrs",
+                    "description": "Sunrise boat ride on the Ganges"
+                }
+            ]
+        }
+    },
+    {
+        "name": "Pondicherry",
+        "type": "beach",
+        "state": "Puducherry",
+        "avgDailyCost": 2000,
+        "bestSeasons": [
+            "Oct",
+            "Nov",
+            "Dec",
+            "Jan",
+            "Feb",
+            "Mar"
+        ],
+        "reachableFrom": [
+            {
+                "city": "Chennai",
+                "busAvg": 350,
+                "trainAvg": 200,
+                "flightAvg": null,
+                "busDuration": "3 hrs",
+                "trainDuration": "3.5 hrs"
+            },
+            {
+                "city": "Bangalore",
+                "busAvg": 800,
+                "trainAvg": 500,
+                "flightAvg": null,
+                "busDuration": "7-8 hrs",
+                "trainDuration": "7 hrs"
+            }
+        ],
+        "highlights": [
+            "French Quarter",
+            "Auroville",
+            "Cafes",
+            "Promenade Beach"
+        ],
+        "description": "A charming former French colony with colorful colonial architecture.",
+        "localData": {
+            "scootyCostPerDay": 350,
+            "taxiCostPerDay": 1000,
+            "avgMealCost": 180,
+            "topRestaurants": [
+                {
+                    "name": "Baker Street",
+                    "cuisine": "French Bakery",
+                    "avgCost": 250,
+                    "rating": 4.4
+                },
+                {
+                    "name": "Surguru",
+                    "cuisine": "South Indian",
+                    "avgCost": 150,
+                    "rating": 4.6
+                }
+            ],
+            "sightseeing": [
+                {
+                    "name": "Auroville",
+                    "entryCost": 0,
+                    "timeNeeded": "Half day",
+                    "description": "Experimental universal township"
+                },
+                {
+                    "name": "French Quarter",
+                    "entryCost": 0,
+                    "timeNeeded": "3 hrs",
+                    "description": "Colonial streets with colorful buildings"
+                }
+            ]
+        }
+    },
+    {
+        "name": "Mcleodganj",
+        "type": "mountains",
+        "state": "Himachal Pradesh",
+        "avgDailyCost": 1600,
+        "bestSeasons": [
+            "Oct",
+            "Nov",
+            "Dec",
+            "Jan",
+            "Feb",
+            "Mar",
+            "Apr",
+            "May"
+        ],
+        "reachableFrom": [
+            {
+                "city": "Delhi",
+                "busAvg": 1400,
+                "trainAvg": 900,
+                "flightAvg": 5000,
+                "busDuration": "10-12 hrs",
+                "trainDuration": "8 hrs + 3 hrs bus"
+            },
+            {
+                "city": "Chandigarh",
+                "busAvg": 600,
+                "trainAvg": 400,
+                "flightAvg": null,
+                "busDuration": "5-6 hrs",
+                "trainDuration": "5 hrs"
+            }
+        ],
+        "highlights": [
+            "Little Lhasa",
+            "Dalai Lama temple",
+            "Triund trek",
+            "Tibetan culture"
+        ],
+        "description": "The residence of the Dalai Lama, a blend of Tibetan culture and mountains.",
+        "localData": {
+            "scootyCostPerDay": 600,
+            "taxiCostPerDay": 1500,
+            "avgMealCost": 170,
+            "topRestaurants": [
+                {
+                    "name": "Illiterati Cafe",
+                    "cuisine": "Cafe",
+                    "avgCost": 300,
+                    "rating": 4.6
+                },
+                {
+                    "name": "Tibet Kitchen",
+                    "cuisine": "Tibetan",
+                    "avgCost": 200,
+                    "rating": 4.5
+                }
+            ],
+            "sightseeing": [
+                {
+                    "name": "Triund Trek",
+                    "entryCost": 0,
+                    "timeNeeded": "Full day",
+                    "description": "Scenic trek to Triund hill"
+                },
+                {
+                    "name": "Dalai Lama Temple",
+                    "entryCost": 0,
+                    "timeNeeded": "2 hrs",
+                    "description": "Main spiritual center"
+                }
+            ]
+        }
+    },
+    {
+        "name": "Mussoorie",
+        "type": "mountains",
+        "state": "Uttarakhand",
+        "avgDailyCost": 1800,
+        "bestSeasons": [
+            "Sep",
+            "Oct",
+            "Nov",
+            "Dec",
+            "Jan",
+            "Feb",
+            "Mar",
+            "Apr",
+            "May"
+        ],
+        "reachableFrom": [
+            {
+                "city": "Delhi",
+                "busAvg": 700,
+                "trainAvg": 500,
+                "flightAvg": 4500,
+                "busDuration": "6-7 hrs",
+                "trainDuration": "5 hrs + 1 hr taxi"
+            },
+            {
+                "city": "Chandigarh",
+                "busAvg": 500,
+                "trainAvg": 350,
+                "flightAvg": null,
+                "busDuration": "5-6 hrs",
+                "trainDuration": "5 hrs"
+            }
+        ],
+        "highlights": [
+            "Queen of Hills",
+            "Mall Road",
+            "Kempty Falls",
+            "Colonial charm"
+        ],
+        "description": "A classic British-era hill station with scenic viewpoints.",
+        "localData": {
+            "scootyCostPerDay": 500,
+            "taxiCostPerDay": 1500,
+            "avgMealCost": 180,
+            "topRestaurants": [
+                {
+                    "name": "Lovely Omelette Centre",
+                    "cuisine": "Snacks",
+                    "avgCost": 100,
+                    "rating": 4.5
+                },
+                {
+                    "name": "Kalsang",
+                    "cuisine": "Tibetan",
+                    "avgCost": 200,
+                    "rating": 4.4
+                }
+            ],
+            "sightseeing": [
+                {
+                    "name": "Kempty Falls",
+                    "entryCost": 50,
+                    "timeNeeded": "2 hrs",
+                    "description": "Popular multi-tiered waterfall"
+                },
+                {
+                    "name": "Gun Hill",
+                    "entryCost": 100,
+                    "timeNeeded": "1.5 hrs",
+                    "description": "Highest point with cable car"
+                }
+            ]
+        }
+    }
+]
