@@ -11,14 +11,14 @@ const RichContent = ({ richContent, onDestinationSelect, selectedDestination }) 
         return (
             <div className="rich-content">
                 <div className="destination-cards">
-                {richContent.destinations.map((dest, i) => (
-                    <DestinationCard
-                        key={i}
-                        destination={dest}
-                        selected={selectedDestination === dest.name}
-                        onSelect={onDestinationSelect}
-                    />
-                ))}
+                    {richContent.destinations.map((dest, i) => (
+                        <DestinationCard
+                            key={i}
+                            destination={dest}
+                            selected={selectedDestination === dest.name}
+                            onSelect={onDestinationSelect}
+                        />
+                    ))}
                 </div>
             </div>
         );
@@ -43,10 +43,9 @@ const RichContent = ({ richContent, onDestinationSelect, selectedDestination }) 
                     <div className="link-section">
                         <div className="link-section__title">🏨 Book Accommodation</div>
                         <div className="link-buttons">
-                            <LinkButton href={richContent.links.booking.bookingCom} icon="🌐" label="Booking.com" />
-                            <LinkButton href={richContent.links.booking.makeMyTrip} icon="✈️" label="MakeMyTrip" />
-                            <LinkButton href={richContent.links.booking.goibibo} icon="🏨" label="Goibibo" />
-                            <LinkButton href={richContent.links.booking.hostelworld} icon="🎒" label="Hostelworld" />
+                            {richContent.links.booking.bookingCom && <LinkButton href={richContent.links.booking.bookingCom} icon="🌐" label="Booking.com" />}
+                            {richContent.links.booking.hostelworld && <LinkButton href={richContent.links.booking.hostelworld} icon="🎒" label="Hostelworld" />}
+                            {richContent.links.booking.skyscannerHotels && <LinkButton href={richContent.links.booking.skyscannerHotels} icon="🏨" label="Skyscanner" />}
                         </div>
                     </div>
                 )}
@@ -55,10 +54,10 @@ const RichContent = ({ richContent, onDestinationSelect, selectedDestination }) 
                     <div className="link-section">
                         <div className="link-section__title">🚌 Book Travel</div>
                         <div className="link-buttons">
-                            <LinkButton href={richContent.links.travel.redBus} icon="🚌" label="RedBus" />
-                            <LinkButton href={richContent.links.travel.irctc} icon="🚂" label="IRCTC" />
-                            <LinkButton href={richContent.links.travel.googleFlights} icon="✈️" label="Google Flights" />
-                            <LinkButton href={richContent.links.travel.ixigo} icon="🎫" label="Ixigo" />
+                            {richContent.links.travel.redBus && <LinkButton href={richContent.links.travel.redBus} icon="🚌" label="RedBus" />}
+                            {richContent.links.travel.googleFlights && <LinkButton href={richContent.links.travel.googleFlights} icon="✈️" label="Google Flights" />}
+                            {richContent.links.travel.skyscannerFlights && <LinkButton href={richContent.links.travel.skyscannerFlights} icon="🛫" label="Skyscanner Flights" />}
+                            {richContent.links.travel.twelveGo && <LinkButton href={richContent.links.travel.twelveGo} icon="🌏" label="12Go" />}
                         </div>
                     </div>
                 )}

@@ -42,12 +42,12 @@ class AgentOrchestrator {
             } catch (error) {
                 console.error('LLM Error:', error.message);
                 // Fallback to rule-based
-                return this.fallbackResponse(session, userMessage);
+                return await this.fallbackResponse(session, userMessage);
             }
         }
 
         // Otherwise use rule-based fallback
-        return this.fallbackResponse(session, userMessage);
+        return await this.fallbackResponse(session, userMessage);
     }
 
     async llmResponse(session, userMessage) {
@@ -78,7 +78,13 @@ class AgentOrchestrator {
         });
 
         console.log(`[LLM] Sending: "${userMessage}" with Context: ${contextMessage}`);
-        let response = await chat.sendMessage(augmentedMessage);
+
+        let finalMessage = augmentedMessage;
+        if (session.selectedDestination) {
+            finalMessage += "\n\nCRITICAL INSTRUCTION: You MUST provide a detailed Day-by-Day Itinerary in your text response now. Focus on sightseeing and activities.";
+        }
+
+        let response = await chat.sendMessage(finalMessage);
         let result = response.response;
 
         // Handle tool calls (up to 5 rounds)
@@ -89,7 +95,7 @@ class AgentOrchestrator {
 
             for (const fc of functionCalls) {
                 console.log(`[TOOL] Calling ${fc.functionCall.name}...`);
-                const toolResult = this.executeTool(fc.functionCall.name, fc.functionCall.args, session);
+                const toolResult = await this.executeTool(fc.functionCall.name, fc.functionCall.args, session);
                 functionResponses.push({
                     functionResponse: {
                         name: fc.functionCall.name,
@@ -110,7 +116,7 @@ class AgentOrchestrator {
         this.detectStateTransition(session, agentText);
 
         console.log(`[ORCHESTRATOR] Final Session State: ${session.state}, Destination: ${session.selectedDestination}`);
-        const richContent = this.buildRichContent(session, agentText);
+        const richContent = await this.buildRichContent(session, agentText);
 
         session.messages.push({
             role: 'assistant',
@@ -143,7 +149,7 @@ class AgentOrchestrator {
         if (!info.people) missing.push('number of people');
 
         if (session.selectedDestination) {
-            return `YOU MUST PROVIDE THE BUDGET BREAKDOWN AND BOOKING LINKS FOR ${session.selectedDestination.toUpperCase()}. User has already selected this destination. Do NOT suggest more cities. Current State: ${session.state}`;
+            return `YOU MUST PROVIDE A DETAILED DAY-BY-DAY ITINERARY TEXT, plus BUDGET BREAKDOWN AND BOOKING LINKS FOR ${session.selectedDestination.toUpperCase()}. User has already selected this destination. Do NOT suggest more cities. Current State: ${session.state}`;
         }
 
         if (missing.length === 0) {
@@ -192,18 +198,19 @@ class AgentOrchestrator {
             // Pattern: 20 Feb to 25 Feb
             const rangeFullMatch = message.match(/(\d{1,2})\s*([a-z]{3,})\s*(?:-|to|till)\s*(\d{1,2})\s*([a-z]{3,})/i);
 
+            const currentYear = new Date().getFullYear();
             if (rangeFullMatch) {
                 const mon1 = monthsMap[rangeFullMatch[2].toLowerCase().substring(0, 3)];
                 const mon2 = monthsMap[rangeFullMatch[4].toLowerCase().substring(0, 3)];
                 if (mon1 && mon2) {
-                    info.startDate = `2026-${mon1}-${rangeFullMatch[1].padStart(2, '0')}`;
-                    info.endDate = `2026-${mon2}-${rangeFullMatch[3].padStart(2, '0')}`;
+                    info.startDate = `${currentYear}-${mon1}-${rangeFullMatch[1].padStart(2, '0')}`;
+                    info.endDate = `${currentYear}-${mon2}-${rangeFullMatch[3].padStart(2, '0')}`;
                 }
             } else if (rangeRevMatch) {
                 const mon = monthsMap[rangeRevMatch[3].toLowerCase().substring(0, 3)];
                 if (mon) {
-                    info.startDate = `2026-${mon}-${rangeRevMatch[1].padStart(2, '0')}`;
-                    info.endDate = `2026-${mon}-${rangeRevMatch[2].padStart(2, '0')}`;
+                    info.startDate = `${currentYear}-${mon}-${rangeRevMatch[1].padStart(2, '0')}`;
+                    info.endDate = `${currentYear}-${mon}-${rangeRevMatch[2].padStart(2, '0')}`;
                 }
             }
 
@@ -269,14 +276,42 @@ class AgentOrchestrator {
         }
 
         // 6. Destination Selection
-        if (!session.selectedDestination) {
-            const destinations = ['Manali', 'Kasol', 'Rishikesh', 'Jaipur', 'Goa', 'Udaipur', 'Mcleodganj', 'Varanasi', 'Pondicherry', 'Mussoorie', 'Tosh', 'Dharamshala', 'Shimla', 'Munnar', 'Ooty', 'Darjeeling', 'Leh', 'Ladakh', 'Hampi', 'Alleppey', 'Kochi', 'Munnar', 'Ooty', 'Coorg', 'Agra', 'Delhi', 'Mumbai'];
-            for (const dest of destinations) {
-                if (lower.includes(dest.toLowerCase())) {
-                    session.selectedDestination = dest;
-                    console.log(`[ORCHESTRATOR] Destination explicitly detected in text: ${dest}`);
-                    break;
-                }
+        // Expanded list to cover more of the 100 cities we will add
+        const potentialDestinations = [
+            'Manali', 'Kasol', 'Rishikesh', 'Jaipur', 'Goa', 'Udaipur', 'Mcleodganj', 'Varanasi', 'Pondicherry', 'Mussoorie',
+            'Tosh', 'Dharamshala', 'Shimla', 'Munnar', 'Ooty', 'Darjeeling', 'Leh', 'Ladakh', 'Hampi', 'Alleppey', 'Kochi',
+            'Coorg', 'Agra', 'Delhi', 'Mumbai', 'Srinagar', 'Gulmarg', 'Pahalgam', 'Jaisalmer', 'Jodhpur', 'Pushkar',
+            'Gangtok', 'Shillong', 'Tawang', 'Ziro', 'Cherrapunji', 'Kaziranga', 'Majuli', 'Varkala', 'Wayanad', 'Gokarna',
+            'Mysore', 'Kodaikanal', 'Rameswaram', 'Madurai', 'Mahabalipuram', 'Kanyakumari', 'Thanjavur', 'Amritsar',
+            'Khajuraho', 'Orchha', 'Gwalior', 'Bhopal', 'Indore', 'Pachmarhi', 'Nashik', 'Aurangabad', 'Lonavala',
+            'Mahabaleshwar', 'Ajanta', 'Ellora', 'Kolkata', 'Darjeeling', 'Kalimpong', 'Sundarbans', 'Digha', 'Puri',
+            'Konark', 'Bhubaneswar', 'Chilika', 'Nainital', 'Almora', 'Ranikhet', 'Auli', 'Kedarnath', 'Badrinath',
+            'Haridwar', 'Dehradun', 'Lansdowne', 'Valley of Flowers', 'Spiti', 'Kaza', 'Chisul', 'Nubra', 'Turtuk',
+            'Kargil', 'Drass', 'Sonamarg', 'Yusmarg', 'Doodhpathri', 'Gurez', 'Patnitop', 'Bhaderwah', 'Katra'
+        ];
+
+        for (const dest of potentialDestinations) {
+            const destLower = dest.toLowerCase();
+            // Check if the message actually contains this city
+            if (lower.includes(destLower)) {
+                // CRITICAL FIX: Ensure this isn't just the user saying "from Delhi"
+
+                // 1. If we already know the origin, and this city IS the origin, ignore it.
+                if (info.origin && info.origin.toLowerCase() === destLower) continue;
+
+                // 2. formatting check: look for "from [city]" or "start [city]"
+                const fromPattern = new RegExp(`(?:from|start|leaving|departure)\\s+(?:in\\s+)?${destLower}`, 'i');
+                if (fromPattern.test(lower)) continue;
+
+                // If we already have this destination selected and it's the same, no need to update
+                if (session.selectedDestination && session.selectedDestination.toLowerCase() === destLower) continue;
+
+                // UPDATE DESTINATION
+                session.selectedDestination = dest;
+                // Clear old breakdown so we regenerate it for the new place
+                session.budgetBreakdown = null;
+                console.log(`[ORCHESTRATOR] Destination explicitly detected/switched to: ${dest}`);
+                break;
             }
         }
 
@@ -321,7 +356,7 @@ class AgentOrchestrator {
     // =====================================================
     // TOOL EXECUTION
     // =====================================================
-    executeTool(name, args, session) {
+    async executeTool(name, args, session) {
         try {
             switch (name) {
                 case 'validateBudget': {
@@ -329,10 +364,10 @@ class AgentOrchestrator {
                     session._budgetTier = result.budgetTier;
                     return result;
                 }
-                case 'getDestinations': return tools.getDestinations(args);
-                case 'getDestinationDetails': return tools.getDestinationDetails(args.destinationName);
+                case 'getDestinations': return await tools.getDestinations(args);
+                case 'getDestinationDetails': return await tools.getDestinationDetails(args.destinationName);
                 case 'buildBudgetBreakdown': {
-                    const result = tools.buildBudgetBreakdown(args);
+                    const result = await tools.buildBudgetBreakdown(args);
                     if (result) session.budgetBreakdown = result;
                     return result;
                 }
@@ -350,7 +385,7 @@ class AgentOrchestrator {
     // CHAT HISTORY BUILDER
     // =====================================================
     buildChatHistory(session) {
-        return session.messages.slice(-10).map(msg => ({
+        return (session.messages || []).slice(-10).map(msg => ({
             role: msg.role === 'user' ? 'user' : 'model',
             parts: [{ text: msg.content }]
         }));
@@ -359,47 +394,63 @@ class AgentOrchestrator {
     // =====================================================
     // RICH CONTENT BUILDER (for UI cards)
     // =====================================================
-    buildRichContent(session, agentText) {
+    async buildRichContent(session, agentText) {
         const rich = { type: 'text' };
         const info = session.collectedInfo || {};
 
-        // If a destination is selected, ALWAYS show the plan
+        // If a destination is selected...
         if (session.selectedDestination) {
-            rich.type = 'fullPlan';
-            const breakdown = session.budgetBreakdown || tools.buildBudgetBreakdown({
-                destination: session.selectedDestination,
-                origin: info.origin || 'Delhi',
-                days: info.days || 5,
-                people: info.people || 1,
-                budget: info.budget || 20000
-            });
-            rich.budgetBreakdown = breakdown;
-            rich.links = {
-                booking: tools.generateBookingLinks({
-                    city: session.selectedDestination,
-                    checkin: info.startDate || '2026-02-20',
-                    checkout: info.endDate || '2026-02-25',
-                    maxPricePerNight: breakdown?.maxStayPerNight || 1500,
-                    people: info.people || 1
-                }),
-                travel: tools.generateTravelLinks({
-                    from: info.origin || 'Delhi',
-                    to: session.selectedDestination,
-                    date: info.startDate || '2026-02-20'
-                }),
-                local: tools.generateLocalLinks({ city: session.selectedDestination })
-            };
-            return rich;
+            // DECISION LOGIC: Should we show the full plan card?
+            // Only show it if the agent is actually presenting the plan, not just chatting.
+            // unique keywords that appear when we generate the plan
+            const isPlanContext = /breakdown|budget|links|itinerary|plan/i.test(agentText || '');
+
+            // Or if we haven't generated a breakdown yet, we probably should show it (first time)
+            const isFirstTime = !session.budgetBreakdown;
+
+            if (isPlanContext || isFirstTime) {
+                rich.type = 'fullPlan';
+
+                // Ensure breakdown exists
+                const breakdown = session.budgetBreakdown || await tools.buildBudgetBreakdown({
+                    destination: session.selectedDestination,
+                    origin: info.origin || 'Delhi',
+                    days: info.days || 5,
+                    people: info.people || 1,
+                    budget: info.budget || 20000
+                });
+                // Save it to session so we don't recalc every time (unless necessary)
+                session.budgetBreakdown = breakdown;
+                rich.budgetBreakdown = breakdown;
+
+                rich.links = {
+                    booking: tools.generateBookingLinks({
+                        city: session.selectedDestination,
+                        checkin: info.startDate || '2026-02-20',
+                        checkout: info.endDate || '2026-02-25',
+                        // Ensure maxPricePerNight has a fallback if breakdown is null
+                        maxPricePerNight: (breakdown?.maxStayPerNight) || 2000,
+                        people: info.people || 1
+                    }),
+                    travel: tools.generateTravelLinks({
+                        from: info.origin || 'Delhi',
+                        to: session.selectedDestination,
+                        date: info.startDate || '2026-02-20'
+                    }),
+                    local: tools.generateLocalLinks({ city: session.selectedDestination })
+                };
+                return rich;
+            }
         }
 
         if (session.state === STATES.PROPOSE_DESTINATIONS && !session.selectedDestination) {
             const month = info.startDate ? new Date(info.startDate).toLocaleString('en', { month: 'short' }) : 'Feb';
-            const dests = tools.getDestinations({
+            const dests = (await tools.getDestinations({
                 origin: info.origin || 'Delhi',
                 month,
                 budgetTier: session._budgetTier || 'budget',
                 preference: info.preference || 'mix'
-            }).slice(0, 4);
+            })).slice(0, 10);
 
             if (dests.length > 0) {
                 rich.type = 'destinations';
@@ -412,7 +463,7 @@ class AgentOrchestrator {
     // =====================================================
     // FALLBACK (Rule-based when LLM is unavailable)
     // =====================================================
-    fallbackResponse(session, message) {
+    async fallbackResponse(session, message) {
         const info = session.collectedInfo || {};
         let text = '';
         let richContent = { type: 'text' };
@@ -458,7 +509,7 @@ class AgentOrchestrator {
 
         if (session.selectedDestination) {
             // Destination is selected, show budget breakdown
-            const breakdown = tools.buildBudgetBreakdown({
+            const breakdown = await tools.buildBudgetBreakdown({
                 destination: session.selectedDestination,
                 origin: info.origin || 'Delhi',
                 days: info.days || 5,
@@ -500,7 +551,7 @@ class AgentOrchestrator {
         session.state = STATES.PROPOSE_DESTINATIONS;
 
         const month = info.startDate ? new Date(info.startDate).toLocaleString('en', { month: 'short' }) : 'Feb';
-        const dests = tools.getDestinations({ origin: info.origin, month, budgetTier: validation.budgetTier, preference: info.preference || 'mix' }).slice(0, 4);
+        const dests = (await tools.getDestinations({ origin: info.origin, month, budgetTier: validation.budgetTier, preference: info.preference || 'mix' })).slice(0, 10);
 
         text = `Nice! ${validation.analysis}\n\n`;
         text += `### 🏔️ Best Options Under ₹${info.budget.toLocaleString()} from ${info.origin}:\n\n`;

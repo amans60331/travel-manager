@@ -14,16 +14,38 @@ const Contact = () => {
         e.preventDefault();
         setSending(true);
 
-        // Send via mailto (client-side) or you can hook up a backend email service
-        const mailtoLink = `mailto:amansharma60331@gmail.com?subject=${encodeURIComponent(formData.subject || 'TravelGenie Contact')}&body=${encodeURIComponent(`Name: ${formData.name}\nEmail: ${formData.email}\n\n${formData.message}`)}`;
-        window.open(mailtoLink, '_blank');
+        try {
+            const response = await fetch("https://api.web3forms.com/submit", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    Accept: "application/json",
+                },
+                body: JSON.stringify({
+                    access_key: "4d6fa68d-b78f-4081-a9f9-c93fa3d148c0",
+                    name: formData.name,
+                    email: formData.email,
+                    subject: formData.subject,
+                    message: formData.message,
+                }),
+            });
 
-        // Simulate send
-        setTimeout(() => {
+            const result = await response.json();
+
+            if (result.success) {
+                setSubmitted(true);
+                setFormData({ name: '', email: '', subject: '', message: '' });
+                setTimeout(() => setSubmitted(false), 5000);
+            } else {
+                console.error("Web3Forms Error:", result);
+                alert("Something went wrong! Please try again later.");
+            }
+        } catch (error) {
+            console.error("Submission Error:", error);
+            alert("Failed to send message. Please check your connection.");
+        } finally {
             setSending(false);
-            setSubmitted(true);
-            setFormData({ name: '', email: '', subject: '', message: '' });
-        }, 1000);
+        }
     };
 
     const quickSubjects = [
@@ -86,7 +108,7 @@ const Contact = () => {
                 <form className="contact-form" onSubmit={handleSubmit}>
                     {submitted && (
                         <div className="contact-form__success">
-                            ✅ Your email client should have opened! If not, you can email me directly at amansharma60331@gmail.com
+                            ✅ Message received! I'll get back to you at {formData.email}.
                         </div>
                     )}
                     <div className="contact-form__group">
