@@ -2,12 +2,18 @@
     max-width: 1100px;
     width: 95%;
     margin: 0 auto;
-    padding: 20px 0 60px;
+    padding: 32px 0 72px;
 }
 
 .contact-hero {
     text-align: center;
-    padding: 50px 20px;
+    padding: 56px 24px 40px;
+    border-radius: var(--radius-lg);
+    background: radial-gradient(circle at top left, rgba(255, 209, 209, 0.6), transparent 55%),
+        radial-gradient(circle at top right, rgba(204, 231, 255, 0.7), transparent 55%),
+        #ffffff;
+    box-shadow: var(--shadow-premium);
+    margin-bottom: 40px;
 }
 
 .contact-hero__title {
@@ -23,6 +29,32 @@
     color: var(--text-muted);
     max-width: 600px;
     margin: 0 auto;
+}
+
+.contact-hero__chips {
+    margin-top: 24px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+}
+
+.contact-hero__chip {
+    border-radius: var(--radius-full);
+    border: 1px solid rgba(15, 23, 42, 0.08);
+    background: rgba(255, 255, 255, 0.9);
+    padding: 8px 16px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--primary);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.contact-hero__chip:hover {
+    border-color: var(--accent);
+    background: var(--bg-main);
+    transform: translateY(-1px);
 }
 
 .contact-grid {
@@ -44,6 +76,8 @@
     border-radius: var(--radius-lg);
     padding: 24px;
     transition: var(--transition);
+    position: relative;
+    overflow: hidden;
 }
 
 .contact-info__card:hover {
@@ -52,8 +86,23 @@
 }
 
 .contact-info__icon {
-    font-size: 1.5rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-full);
+    padding: 4px 12px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
     margin-bottom: 10px;
+    background: var(--bg-main);
+    color: var(--text-muted);
+}
+
+.contact-info__icon--accent {
+    background: rgba(255, 118, 117, 0.08);
+    color: var(--accent);
 }
 
 .contact-info__card h3 {
@@ -93,7 +142,7 @@
     border: 1px solid var(--border);
     border-radius: var(--radius-lg);
     padding: 40px;
-    box-shadow: var(--shadow-sm);
+    box-shadow: var(--shadow-premium);
 }
 
 .contact-form__success {
@@ -146,6 +195,14 @@
     min-height: 120px;
 }
 
+.contact-form__meta {
+    margin-top: 6px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.78rem;
+    color: var(--text-muted);
+}
+
 .contact-form__submit {
     width: 100%;
     padding: 16px;
@@ -181,5 +238,11 @@
 
     .contact-form {
         padding: 24px;
+    }
+
+    .contact-form__meta {
+        flex-direction: column;
+        gap: 2px;
+        align-items: flex-start;
     }
 }

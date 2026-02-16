@@ -1,6 +1,9 @@
 .rich-content {
-    margin-top: 16px;
+    margin-top: 12px;
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
 }
 
 .destination-cards {
@@ -21,7 +24,28 @@
     display: flex;
     flex-direction: column;
     gap: 30px;
-    padding-top: 10px;
+    padding-top: 8px;
+}
+
+.link-section {
+    background: #ffffff;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border);
+    padding: 18px 16px 16px;
+}
+
+.link-section__title {
+    font-family: var(--font-heading);
+    font-size: 0.98rem;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 10px;
+}
+
+.link-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
 }
 
 .rich-content__section {

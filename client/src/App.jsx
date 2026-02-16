@@ -12,7 +12,7 @@ import Contact from './pages/Contact';
 import { createSession, sendMessage } from './api/agent';
 import './App.css';
 
-const Home = ({ messages, isTyping, handleSend, handleDestinationSelect, selectedDestination, handleSuggestionClick, handleNewChat }) => (
+const Home = ({ messages, isTyping, handleSend, handleDestinationSelect, selectedDestination, handleSuggestionClick, handleNewChat, hasStarted }) => (
     <div className="chat-container">
         <div className="chat-header">
             <h3>AI Travel Planner</h3>
@@ -24,6 +24,7 @@ const Home = ({ messages, isTyping, handleSend, handleDestinationSelect, selecte
             onDestinationSelect={handleDestinationSelect}
             selectedDestination={selectedDestination}
             onSuggestionClick={handleSuggestionClick}
+            hasStarted={hasStarted}
         />
         <InputBar onSend={handleSend} disabled={isTyping} />
     </div>
@@ -35,48 +36,72 @@ const App = () => {
     const [messages, setMessages] = useState([]);
     const [isTyping, setIsTyping] = useState(false);
     const [selectedDestination, setSelectedDestination] = useState(null);
+    const [hasStarted, setHasStarted] = useState(false);
 
     const initSession = useCallback(async () => {
         try {
             const data = await createSession();
             setSessionId(data.sessionId);
-            if (data.welcomeMessage) {
-                const welcomeMsg = {
-                    role: 'assistant',
-                    content: data.welcomeMessage.text,
-                    richContent: data.welcomeMessage.richContent,
-                    timestamp: new Date().toISOString()
-                };
-                setMessages([welcomeMsg]);
-            }
+            return data;
         } catch (error) {
             console.error('Failed to create session:', error);
+            throw error;
         }
     }, []);
 
     useEffect(() => {
-        initSession();
         const timer = setTimeout(() => setLoading(false), 2500);
         return () => clearTimeout(timer);
     }, []); // Run ONLY once on mount
 
     const handleSend = useCallback(async (text) => {
         if (!text.trim() || isTyping) return;
+
+        setHasStarted(true);
+
+        // Show the user's message immediately so the chat never looks blank
         const userMsg = { role: 'user', content: text, timestamp: new Date().toISOString() };
         setMessages(prev => [...prev, userMsg]);
         setIsTyping(true);
+
+        let activeSessionId = sessionId;
+
+        // Lazily create a session on first interaction so the landing hero stays visible.
+        // We intentionally do NOT show the backend welcome bubble here so your first
+        // question is always the starting point of the visible chat.
+        if (!activeSessionId) {
+            try {
+                const data = await initSession();
+                activeSessionId = data.sessionId;
+            } catch (e) {
+                console.error('Failed to initialise session before sending:', e);
+            }
+        }
+
         try {
-            const data = await sendMessage(sessionId, text);
-            const assistantMsg = { role: 'assistant', content: data.response, richContent: data.richContent, timestamp: new Date().toISOString() };
+            const data = await sendMessage(activeSessionId, text);
+            const assistantMsg = {
+                role: 'assistant',
+                content: data.response,
+                richContent: data.richContent,
+                timestamp: new Date().toISOString(),
+            };
             setMessages(prev => [...prev, assistantMsg]);
             if (data.collectedInfo?.selectedDestination) setSelectedDestination(data.collectedInfo.selectedDestination);
         } catch (error) {
             console.error('Send error:', error);
-            setMessages(prev => [...prev, { role: 'assistant', content: 'Sorry, something went wrong. Please try again!', timestamp: new Date().toISOString() }]);
+            setMessages(prev => [
+                ...prev,
+                {
+                    role: 'assistant',
+                    content: 'Sorry, something went wrong. Please try again!',
+                    timestamp: new Date().toISOString(),
+                },
+            ]);
         } finally {
             setIsTyping(false);
         }
-    }, [sessionId, isTyping]);
+    }, [sessionId, isTyping, initSession]);
 
     const handleDestinationSelect = useCallback((destName) => {
         setSelectedDestination(destName);
@@ -87,7 +112,8 @@ const App = () => {
         setMessages([]);
         setSelectedDestination(null);
         setIsTyping(false);
-        initSession();
+        setSessionId(null);
+        setHasStarted(false);
     }, [initSession]);
 
     const handleSuggestionClick = useCallback((text) => handleSend(text), [handleSend]);
@@ -110,6 +136,7 @@ const App = () => {
                                 selectedDestination={selectedDestination}
                                 handleSuggestionClick={handleSuggestionClick}
                                 handleNewChat={handleNewChat}
+                                hasStarted={hasStarted}
                             />
                         } />
                         <Route path="/destinations" element={<Destinations />} />

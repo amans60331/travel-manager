@@ -2,6 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import './Preloader.css';
 
+const loadingPhrases = [
+    'Mapping budget-friendly escapes across India…',
+    'Balancing your stay, food, and travel costs…',
+    'Picking destinations that match your vibe…',
+    'Designing your personalised AI itinerary…',
+];
+
 const Preloader = () => {
     const [progress, setProgress] = useState(0);
     const [isVisible, setIsVisible] = useState(true);
@@ -14,13 +21,17 @@ const Preloader = () => {
                     setTimeout(() => setIsVisible(false), 500);
                     return 100;
                 }
-                return prev + Math.random() * 15;
+                return Math.min(100, prev + Math.random() * 12);
             });
-        }, 150);
+        }, 140);
+
         return () => clearInterval(interval);
     }, []);
 
-    const words = ["Dream", "Plan", "Explore", "TravelGenie"];
+    const currentPhraseIndex = Math.min(
+        loadingPhrases.length - 1,
+        Math.floor(progress / (100 / loadingPhrases.length))
+    );
 
     return (
         <AnimatePresence>
@@ -30,35 +41,49 @@ const Preloader = () => {
                     initial={{ opacity: 1 }}
                     exit={{
                         opacity: 0,
-                        y: -100,
-                        transition: { duration: 0.8, ease: [0.76, 0, 0.24, 1] }
+                        y: -80,
+                        transition: { duration: 0.8, ease: [0.76, 0, 0.24, 1] },
                     }}
                 >
                     <div className="preloader__content">
                         <motion.div
                             className="preloader__logo"
-                            initial={{ scale: 0.8, opacity: 0 }}
-                            animate={{ scale: 1, opacity: 1 }}
-                            transition={{ duration: 1, ease: "easeOut" }}
+                            initial={{ scale: 0.8, opacity: 0, y: 10 }}
+                            animate={{ scale: 1, opacity: 1, y: 0 }}
+                            transition={{ duration: 0.9, ease: 'easeOut' }}
                         >
-                            <span className="preloader__icon">✨</span>
+                            <span className="preloader__logo-mark">TG</span>
                         </motion.div>
 
-                        <div className="preloader__text-container">
-                            {words.map((word, i) => (
-                                <motion.span
-                                    key={i}
-                                    className="preloader__word"
-                                    initial={{ opacity: 0, y: 20 }}
-                                    animate={{
-                                        opacity: progress > (i * 25) ? 1 : 0,
-                                        y: progress > (i * 25) ? 0 : 20
-                                    }}
-                                    transition={{ duration: 0.5 }}
-                                >
-                                    {word}{i < words.length - 1 ? " • " : ""}
-                                </motion.span>
-                            ))}
+                        <div className="preloader__text-block">
+                            <motion.h1
+                                className="preloader__headline"
+                                initial={{ opacity: 0, y: 10 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: 0.1 }}
+                            >
+                                TravelGenie
+                            </motion.h1>
+                            <p className="preloader__subtitle">
+                                Dream, plan, and explore budget trips across India crafted by your AI travel manager.
+                            </p>
+
+                            <div className="preloader__phrases">
+                                {loadingPhrases.map((phrase, index) => (
+                                    <motion.span
+                                        key={phrase}
+                                        className={`preloader__phrase ${index === currentPhraseIndex ? 'preloader__phrase--active' : ''}`}
+                                        initial={{ opacity: 0, y: 8 }}
+                                        animate={{
+                                            opacity: index === currentPhraseIndex ? 1 : 0.3,
+                                            y: index === currentPhraseIndex ? 0 : 4,
+                                        }}
+                                        transition={{ duration: 0.4 }}
+                                    >
+                                        {phrase}
+                                    </motion.span>
+                                ))}
+                            </div>
                         </div>
 
                         <div className="preloader__bar-container">
@@ -66,7 +91,7 @@ const Preloader = () => {
                                 className="preloader__bar"
                                 initial={{ width: 0 }}
                                 animate={{ width: `${progress}%` }}
-                                transition={{ ease: "linear" }}
+                                transition={{ ease: 'linear' }}
                             />
                         </div>
 
@@ -83,19 +108,19 @@ const Preloader = () => {
                         <motion.div
                             className="shape shape--1"
                             animate={{
-                                scale: [1, 1.2, 1],
-                                rotate: [0, 90, 0],
+                                scale: [1, 1.15, 1],
+                                rotate: [0, 60, 0],
                             }}
                             transition={{ duration: 10, repeat: Infinity }}
                         />
                         <motion.div
                             className="shape shape--2"
                             animate={{
-                                scale: [1, 1.3, 1],
-                                x: [0, 50, 0],
-                                y: [0, -30, 0],
+                                scale: [1, 1.25, 1],
+                                x: [0, 40, 0],
+                                y: [0, -24, 0],
                             }}
-                            transition={{ duration: 15, repeat: Infinity }}
+                            transition={{ duration: 14, repeat: Infinity }}
                         />
                     </div>
                 </motion.div>

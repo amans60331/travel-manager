@@ -9,7 +9,8 @@ const RichContent = ({ richContent, onDestinationSelect, selectedDestination }) 
 
     if (richContent.type === 'destinations' && richContent.destinations?.length > 0) {
         return (
-            <div className="destination-cards">
+            <div className="rich-content">
+                <div className="destination-cards">
                 {richContent.destinations.map((dest, i) => (
                     <DestinationCard
                         key={i}
@@ -18,17 +19,22 @@ const RichContent = ({ richContent, onDestinationSelect, selectedDestination }) 
                         onSelect={onDestinationSelect}
                     />
                 ))}
+                </div>
             </div>
         );
     }
 
     if (richContent.type === 'budgetBreakdown' && richContent.budgetBreakdown) {
-        return <BudgetBreakdown breakdown={richContent.budgetBreakdown} />;
+        return (
+            <div className="rich-content">
+                <BudgetBreakdown breakdown={richContent.budgetBreakdown} />
+            </div>
+        );
     }
 
     if (richContent.type === 'fullPlan') {
         return (
-            <div className="full-plan">
+            <div className="rich-content rich-content__full-plan">
                 {richContent.budgetBreakdown && (
                     <BudgetBreakdown breakdown={richContent.budgetBreakdown} />
                 )}

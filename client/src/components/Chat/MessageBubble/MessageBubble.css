@@ -41,6 +41,11 @@
     box-shadow: var(--shadow-sm);
 }
 
+.message__rich-content {
+    margin-top: 10px;
+    padding: 10px 4px 4px;
+}
+
 .message--user .message__content {
     background: var(--accent-gradient);
     color: white;

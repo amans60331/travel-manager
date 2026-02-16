@@ -3,7 +3,7 @@ import MessageBubble from '../MessageBubble/MessageBubble';
 import TypingIndicator from '../TypingIndicator/TypingIndicator';
 import './ChatWindow.css';
 
-const ChatWindow = ({ messages, isTyping, onDestinationSelect, selectedDestination, onSuggestionClick }) => {
+const ChatWindow = ({ messages, isTyping, onDestinationSelect, selectedDestination, onSuggestionClick, hasStarted }) => {
     const chatContainerRef = useRef(null);
 
     useEffect(() => {
@@ -14,14 +14,14 @@ const ChatWindow = ({ messages, isTyping, onDestinationSelect, selectedDestinati
 
     const hasMessages = messages && messages.length > 0;
 
-    if (!hasMessages && !isTyping) {
+    if (!hasMessages && !isTyping && !hasStarted) {
         return (
             <div className="chat-window chat-window--empty-state">
                 <div className="chat-window__empty">
                     <div className="chat-window__empty-icon">🌍</div>
                     <div className="chat-window__empty-title">Plan Your Dream Trip</div>
                     <div className="chat-window__empty-text">
-                        Tell me your budget, dates, and preferences — I'll suggest the perfect destinations with real booking links, itineraries, and budget breakdowns!
+                        Tell me your budget, dates, and preferences. I'll suggest the perfect destinations with real booking links, itineraries, and budget breakdowns!
                     </div>
                     <div className="suggestions">
                         <button className="suggestion-chip" onClick={() => onSuggestionClick("Hi, I want to travel from Pune to mountains with a 20k budget for 5 days")}>

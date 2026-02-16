@@ -26,6 +26,15 @@ const Contact = () => {
         }, 1000);
     };
 
+    const quickSubjects = [
+        'Product feedback',
+        'Bug or issue',
+        'Collaboration opportunity',
+        'Just saying hi',
+    ];
+
+    const messageLength = formData.message.length;
+
     return (
         <div className="contact-page">
             <div className="contact-hero">
@@ -33,31 +42,43 @@ const Contact = () => {
                 <p className="contact-hero__subtitle">
                     Have a question, feedback, or want to collaborate? I'd love to hear from you!
                 </p>
+                <div className="contact-hero__chips">
+                    {quickSubjects.map(subject => (
+                        <button
+                            key={subject}
+                            type="button"
+                            className="contact-hero__chip"
+                            onClick={() => setFormData(prev => ({ ...prev, subject }))}
+                        >
+                            {subject}
+                        </button>
+                    ))}
+                </div>
             </div>
 
             <div className="contact-grid">
                 <div className="contact-info">
                     <div className="contact-info__card">
-                        <div className="contact-info__icon">📧</div>
+                        <div className="contact-info__icon contact-info__icon--accent">Email</div>
                         <h3>Email</h3>
                         <p>amansharma60331@gmail.com</p>
                     </div>
                     <div className="contact-info__card">
-                        <div className="contact-info__icon">📍</div>
+                        <div className="contact-info__icon contact-info__icon--accent">Location</div>
                         <h3>Location</h3>
                         <p>India</p>
                     </div>
                     <div className="contact-info__card">
-                        <div className="contact-info__icon">⏰</div>
+                        <div className="contact-info__icon contact-info__icon--accent">Response</div>
                         <h3>Response Time</h3>
                         <p>Usually within 24 hours</p>
                     </div>
                     <div className="contact-info__card">
-                        <div className="contact-info__icon">🔗</div>
+                        <div className="contact-info__icon contact-info__icon--accent">Social</div>
                         <h3>Social</h3>
                         <div className="contact-social-links">
-                            <a href="https://github.com/amansharma60331" target="_blank" rel="noopener noreferrer">GitHub</a>
-                            <a href="https://linkedin.com/in/amansharma60331" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                            <a href="https://github.com/amans60331" target="_blank" rel="noopener noreferrer">GitHub</a>
+                            <a href="https://www.linkedin.com/in/aman-sharma-249508116" target="_blank" rel="noopener noreferrer">LinkedIn</a>
                         </div>
                     </div>
                 </div>
@@ -114,9 +135,13 @@ const Contact = () => {
                             rows={6}
                             required
                         />
+                        <div className="contact-form__meta">
+                            <span>{messageLength} / 1000 characters</span>
+                            <span>Tell me as much detail as you’d like.</span>
+                        </div>
                     </div>
                     <button className="contact-form__submit" type="submit" disabled={sending}>
-                        {sending ? 'Opening email...' : '📧 Send Message'}
+                        {sending ? 'Opening email...' : 'Send Message'}
                     </button>
                 </form>
             </div>

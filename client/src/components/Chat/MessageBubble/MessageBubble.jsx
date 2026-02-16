@@ -130,11 +130,13 @@ const MessageBubble = ({ message, onDestinationSelect, selectedDestination }) =>
                     {parseMarkdown(message.content)}
                 </div>
                 {message.richContent && (
-                    <RichContent
-                        richContent={message.richContent}
-                        onDestinationSelect={onDestinationSelect}
-                        selectedDestination={selectedDestination}
-                    />
+                    <div className="message__rich-content">
+                        <RichContent
+                            richContent={message.richContent}
+                            onDestinationSelect={onDestinationSelect}
+                            selectedDestination={selectedDestination}
+                        />
+                    </div>
                 )}
                 {time && <div className="message__time">{time}</div>}
             </div>
