@@ -29,8 +29,8 @@ We will use **Render** (free tier) for the Node.js backend.
 4.  **Environment Variables**:
     - Add the following keys:
         - `GEMINI_API_KEY`: Your actual Google Gemini API Key.
-        - `PORT`: `10000` (Render creates this automatically, but good to know).
-        - `MONGODB_URI`: (Optional) If you have a Mongo Atlas cluster. If not, the app will fallback to `destinations.json` (Safe for MVP).
+        - `MONGODB_URI`: (Optional) If you have a Mongo Atlas cluster.
+        - **Note on PORT**: Render automatically sets the `PORT` variable (usually to 10000). You do **NOT** need to add this manually. Your code `process.env.PORT` handles it.
 5.  **Deploy**: Click "Create Web Service".
 6.  **Copy URL**: Once deployed, copy the service URL (e.g., `https://travel-manager-api.onrender.com`).
 
